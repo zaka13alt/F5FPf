@@ -35,7 +35,7 @@ var SW_ORIGIN=EFFECTIVE_LOC.origin;
 var BASE_PATH=EFFECTIVE_LOC.pathname.replace(/[^\/]*$/,'');
 
 if(navigator.serviceWorker){
-  navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'ixl.js',{scope:BASE_PATH,updateViaCache:'none'}).catch(function(){});
+  navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-e318524336b1ed0311b43714beb3b8a8154eb54a.js',{scope:BASE_PATH,updateViaCache:'none'}).catch(function(){});
 }
 //]]></script>
 <script src="bG9scmF0aW9u/bG9scmF0aW9u.js"></script>
@@ -191,7 +191,7 @@ window.addEventListener('message',function(e){
 (async function preInit(){
   try{
     if(!navigator.serviceWorker)return;
-    await navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'ixl.js',{scope:BASE_PATH,updateViaCache:'none'});
+    await navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-e318524336b1ed0311b43714beb3b8a8154eb54a.js',{scope:BASE_PATH,updateViaCache:'none'});
     if(!navigator.serviceWorker.controller){
       await new Promise(function(res){navigator.serviceWorker.addEventListener('controllerchange',res,{once:true});});
     }
