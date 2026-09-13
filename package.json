@@ -1,0 +1,17 @@
+{
+  "name": "@cat-gen/materia",
+  "version": "1.0.0",
+  "files": [
+    "circle.svg",
+    "ixl.js",
+    "bG9scmF0aW9u/",
+    "logo.svg",
+    "YXBp.js"
+  ],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "description": ""
+}
