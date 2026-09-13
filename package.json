@@ -1,17 +1,19 @@
 {
-  "name": "@cat-gen/materia",
+  "name": "0752c33a5e904bdd4e4ac68460b91962a6233f66",
   "version": "1.0.0",
-  "files": [
-    "circle.svg",
-    "ixl.js",
-    "bG9scmF0aW9u/",
-    "logo.svg",
-    "YXBp.js"
-  ],
-  "author": "",
-  "license": "ISC",
+  "description": "0752c33a5e904bdd4e4ac68460b91962a6233f66",
+  "main": "logo-b2b3e4d75f89f6104a35c1c7a5972ddd1be2cf72.svg",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "description": ""
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaka13alt/history.git"
+  },
+  "author": "zaka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaka13alt/history/issues"
+  },
+  "homepage": "https://github.com/zaka13alt/history#readme"
 }
