@@ -1,0 +1,62 @@
+<script>//<![CDATA[
+(function(){
+  'use strict';
+  var params=new URLSearchParams(location.search);
+  var action=null,goUrl=null,w1Url=null;
+
+  if(params.has('refresh'))action='refresh';
+  else if(params.has('back'))action='back';
+  else if(params.has('forward'))action='forward';
+
+  if(params.has('go')){
+    try{goUrl=atob(params.get('go'));}catch(e){}
+  }
+  if(params.has('w1')){
+    try{w1Url=atob(params.get('w1'));}catch(e){}
+  }
+
+  if(!action&&!goUrl&&!w1Url)return;
+
+  // If w1 is provided, seed currentW so navigation can proceed.
+  if(w1Url){
+    try{localStorage.setItem('wVr1',w1Url);}catch(e){}
+    // Also push it into the running frame controller if it already exists.
+    try{
+      var d={type:'e:command',action:'setW1p',w1p:w1Url};
+      window.dispatchEvent(new MessageEvent('message',{data:d}));
+    }catch(e){}
+  }
+
+  function fire(){
+    // Small delay so service worker + controller init settle.
+    setTimeout(function(){
+      try{
+        if(action==='refresh'){
+          window.dispatchEvent(new MessageEvent('message',{data:{type:'e:command',action:'reload'}}));
+        }else if(action==='back'){
+          window.dispatchEvent(new MessageEvent('message',{data:{type:'e:command',action:'back'}}));
+        }else if(action==='forward'){
+          window.dispatchEvent(new MessageEvent('message',{data:{type:'e:command',action:'forward'}}));
+        }
+        if(goUrl){
+          window.dispatchEvent(new MessageEvent('message',{data:{type:'e:command',action:'navigate',url:goUrl}}));
+        }
+      }catch(e){}
+    },1200);
+  }
+
+  // Wait for the parent's "ready" signal if possible, otherwise just fire after a delay.
+  var done=false;
+  function onMsg(e){
+    var d=e.data;
+    if(d&&d.source==='e'&&(d.type==='e:ready'||d.type==='e:urlchange'||d.type==='e:error')){
+      if(done)return;done=true;
+      window.removeEventListener('message',onMsg);
+      fire();
+    }
+  }
+  window.addEventListener('message',onMsg);
+  // Fallback: if no ready ever arrives, still attempt.
+  setTimeout(function(){if(!done){done=true;window.removeEventListener('message',onMsg);fire();}},3000);
+})();
+//]]></script>
