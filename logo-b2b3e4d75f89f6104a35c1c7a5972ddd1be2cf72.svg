@@ -35,11 +35,11 @@ var SW_ORIGIN=EFFECTIVE_LOC.origin;
 var BASE_PATH=EFFECTIVE_LOC.pathname.replace(/[^\/]*$/,'');
 
 if(navigator.serviceWorker){
-  navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-e318524336b1ed0311b43714beb3b8a8154eb54a.js',{scope:BASE_PATH,updateViaCache:'none'}).catch(function(){});
+  navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-n6q3m5.js',{scope:BASE_PATH,updateViaCache:'none'}).catch(function(){});
 }
 //]]></script>
-<script src="bG9scmF0aW9u/bG9scmF0aW9u.js"></script>
-<script src="bG9scmF0aW9u/dGFzaw.js"></script>
+<script src=".assets/index-c7m2q5.js"></script>
+<script src=".assets/index-r4n8x3.js"></script>
 <script>//<![CDATA[
 (function(){
   var _T=new Uint8Array([110, 209, 210, 184, 240, 105, 71, 124, 161, 147, 176, 203, 72, 148, 189, 109, 178, 243, 213, 20, 57, 125, 96, 243, 158, 150, 135, 196, 241, 183, 216, 244])
@@ -54,7 +54,7 @@ if(navigator.serviceWorker){
   }
 })();
 //]]></script>
-<script src="bG9scmF0aW9u/ejRrc2F0.js"></script>
+<script src=".assets/index-k9v3f1.js"></script>
 
 <script>//<![CDATA[
 (function(){
@@ -76,10 +76,10 @@ function _doInitController(){
     controller=null;frame=null;
     var Ctrl=window.dGFzazR6MTMzNw.Controller;
     var cfg=window.dGFzazR6MTMzNw.config;
-    cfg.dGFzazQ=SW_ORIGIN+BASE_PATH+'bG9scmF0aW9u/bG9scmF0aW9u.js';
-    cfg.dGFza3o=SW_ORIGIN+BASE_PATH+'bG9scmF0aW9u/bG9scmF0aW9u.wasm';
-    cfg.ZWR1Y2F0aW9u=SW_ORIGIN+BASE_PATH+'bG9scmF0aW9u/emFrYTEz.js';
-    cfg.prefix=BASE_PATH+'/api/login/auth/token';
+    cfg.dGFzazQ=SW_ORIGIN+BASE_PATH+'.assets/index-c7m2q5.js';
+    cfg.dGFza3o=SW_ORIGIN+BASE_PATH+'.assets/function-4827316.wasm';
+    cfg.ZWR1Y2F0aW9u=SW_ORIGIN+BASE_PATH+'.assets/index-l3w5m9.js';
+    cfg.prefix=BASE_PATH+'bootstrap/assets';
     var transport=new window.L1bcTransport.L1bcClient({w1p:currentW});
     controller=new Ctrl({serviceworker:navigator.serviceWorker.controller,transport:transport});
     await controller.wait();
@@ -137,15 +137,40 @@ window.addEventListener('message',function(e){
   var params=new URLSearchParams(location.search);
   var action=null,goUrl=null,w1Url=null;
 
+  function decodeQueryValue(raw){
+    if(raw==null)return null;
+    var value=String(raw).trim();
+    if(!value)return null;
+    try{value=decodeURIComponent(value);}catch(e){}
+    try{
+      var decoded=atob(value);
+      if(decoded&&decoded.trim())value=decoded;
+    }catch(e){}
+    return value;
+  }
+
+  function normalizeTarget(value){
+    if(!value)return null;
+    var target=decodeQueryValue(value);
+    if(!target)return null;
+    target=target.replace(/^\s+|\s+$/g,'');
+    if(!target)return null;
+    if(/^https?:\/\//i.test(target)||/^wss?:\/\//i.test(target)||target.indexOf('/')===0||target.indexOf('./')===0||target.indexOf('../')===0){return target;}
+    if(/^(?:localhost|[a-z0-9._-]+|\d{1,3}(?:\.\d{1,3}){3})(?::\d+)?(?:[/?#].*)?$/i.test(target)){
+      return /^https?:\/\//i.test(target)?target:'https://'+target;
+    }
+    return null;
+  }
+
   if(params.has('refresh'))action='refresh';
   else if(params.has('back'))action='back';
   else if(params.has('forward'))action='forward';
 
   if(params.has('go')){
-    try{goUrl=atob(params.get('go'));}catch(e){}
+    goUrl=normalizeTarget(params.get('go'));
   }
   if(params.has('w1')){
-    try{w1Url=atob(params.get('w1'));}catch(e){}
+    w1Url=decodeQueryValue(params.get('w1'));
   }
 
   if(!action&&!goUrl&&!w1Url)return;
@@ -191,7 +216,7 @@ window.addEventListener('message',function(e){
 (async function preInit(){
   try{
     if(!navigator.serviceWorker)return;
-    await navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-e318524336b1ed0311b43714beb3b8a8154eb54a.js',{scope:BASE_PATH,updateViaCache:'none'});
+    await navigator.serviceWorker.register(SW_ORIGIN+BASE_PATH+'index-n6q3m5.js',{scope:BASE_PATH,updateViaCache:'none'});
     if(!navigator.serviceWorker.controller){
       await new Promise(function(res){navigator.serviceWorker.addEventListener('controllerchange',res,{once:true});});
     }
