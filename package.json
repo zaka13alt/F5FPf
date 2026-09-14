@@ -1,7 +1,8 @@
+
 {
-  "name": "0752c33a5e904bdd4e4ac68460b91962a6233f66",
-  "version": "1.0.0",
-  "description": "0752c33a5e904bdd4e4ac68460b91962a6233f66",
+  "name": "webpackbootstrapscripts",
+  "version": "5.110.3",
+  "description": "bootstrap assets for Webpacks runtime.",
   "main": "logo-b2b3e4d75f89f6104a35c1c7a5972ddd1be2cf72.svg",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
